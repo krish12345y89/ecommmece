@@ -1,93 +1,118 @@
-# E-Commerce Full-Stack
+# MERN Ecommerce
 
-A complete e-commerce application with React frontend and Node.js/Express backend.
+## Description
 
-## Project Structure
+An ecommerce store built with MERN stack, and utilizes third party API's. This ecommerce store enable three main different flows or implementations:
+
+1. Buyers browse the store categories, products and brands
+2. Sellers or Merchants manage their own brand component
+3. Admins manage and control the entire store components 
+
+### Features:
+
+  * Node provides the backend environment for this application
+  * Express middleware is used to handle requests, routes
+  * Mongoose schemas to model the application data
+  * React for displaying UI components
+  * Redux to manage application's state
+  * Redux Thunk middleware to handle asynchronous redux actions
+
+## Demo
+
+This application is deployed on Vercel Please check it out :smile: [here](https://mern-store-gold.vercel.app).
+
+See admin dashboard [demo](https://mernstore-bucket.s3.us-east-2.amazonaws.com/admin.mp4)
+
+## Docker Guide
+
+To run this project locally you can use docker compose provided in the repository. Here is a guide on how to run this project locally using docker compose.
+
+Clone the repository
+```
+git clone https://github.com/mohamedsamara/mern-ecommerce.git
+```
+
+Edit the dockercompose.yml file and update the the values for MONGO_URI and JWT_SECRET
+
+Then simply start the docker compose:
 
 ```
-ecommerce/
-├── frontend/          # React application (Vercel deployment)
-├── backend/           # Node.js/Express API (Vercel serverless)
-└── README.md
+docker-compose build
+docker-compose up
 ```
 
-## Local Development
+## Database Seed
 
-### Backend Setup
+* The seed command will create an admin user in the database
+* The email and password are passed with the command as arguments
+* Like below command, replace brackets with email and password. 
+* For more information, see code [here](server/utils/seed.js)
 
-```powershell
-cd backend
+```
+npm run seed:db [email-***@****.com] [password-******] // This is just an example.
+```
+
+## Install
+
+`npm install` in the project root will install dependencies in both `client` and `server`. [See package.json](package.json)
+
+Some basic Git commands are:
+
+```
+git clone https://github.com/mohamedsamara/mern-ecommerce.git
+cd project
 npm install
-cp .env.example .env
-# Edit .env with your MONGODB_URI and JWT_SECRET
+```
+
+## ENV
+
+Create `.env` file for both client and server. See examples:
+
+[Frontend ENV](client/.env.example)
+
+[Backend ENV](server/.env.example)
+
+
+## Vercel Deployment
+
+Both frontend and backend are deployed on Vercel from the same repository. When deploying on Vercel, make sure to specifiy the root directory as `client` and `server` when importing the repository. See [client vercel.json](client/vercel.json) and [server vercel.json](server/vercel.json).
+
+## Start development
+
+```
 npm run dev
 ```
 
-Backend runs on `http://localhost:5000`
+## Languages & tools
 
-### Frontend Setup
+- [Node](https://nodejs.org/en/)
 
-```powershell
-cd frontend
-npm install
-npm start
+- [Express](https://expressjs.com/)
+
+- [Mongoose](https://mongoosejs.com/)
+
+- [React](https://reactjs.org/)
+
+- [Webpack](https://webpack.js.org/)
+
+
+### Code Formatter
+
+- Add a `.vscode` directory
+- Create a file `settings.json` inside `.vscode`
+- Install Prettier - Code formatter in VSCode
+- Add the following snippet:  
+
+```json
+
+    {
+      "editor.formatOnSave": true,
+      "prettier.singleQuote": true,
+      "prettier.arrowParens": "avoid",
+      "prettier.jsxSingleQuote": true,
+      "prettier.trailingComma": "none",
+      "javascript.preferences.quoteStyle": "single",
+    }
+
 ```
 
-Frontend runs on `http://localhost:3000` with proxy to backend.
-
-## Deployment to Vercel
-
-### Option 1: Separate Repositories (Recommended)
-
-1. **Create two separate repos:**
-   - `ecommerce-frontend` → deploy frontend
-   - `ecommerce-backend` → deploy backend
-
-2. **Backend Deployment:**
-   - Push `backend/` to a new repo
-   - Connect to Vercel
-   - Add environment variables: `MONGODB_URI`, `JWT_SECRET`
-   - Deploy (automatically uses `vercel.json` config)
-   - Note the backend URL: `https://your-backend.vercel.app`
-
-3. **Frontend Deployment:**
-   - Push `frontend/` to a new repo
-   - Add `REACT_APP_API_URL=https://your-backend.vercel.app` as environment variable in Vercel
-   - Deploy
-
-### Option 2: Monorepo with Vercel (Alternative)
-
-Deploy both from this repo using `vercel.json` at root level (contact me for setup).
-
-## Features
-
-✅ Product listing with pagination  
-✅ Product details page  
-✅ Shopping cart (Redux + localStorage)  
-✅ User authentication (JWT)  
-✅ Order management  
-✅ Responsive Bootstrap design  
-
-## API Endpoints
-
-- `POST /api/auth/register` - Register user
-- `POST /api/auth/login` - Login user
-- `GET /api/products` - Get all products
-- `GET /api/products/:id` - Get product details
-- `POST /api/orders` - Create order
-- `GET /api/orders/:id` - Get order
-
-## Notes
-
-- Backend uses MongoDB (MongoDB Atlas recommended for cloud)
-- Frontend uses React Router, Redux, Axios, Bootstrap
-- Proxy in dev: `http://localhost:5000`
-- Production: `REACT_APP_API_URL` environment variable
-
-## Next Steps
-
-- Add user registration screen
-- Implement shipping & payment screens
-- Add order history screen
-- Implement admin panel
-- Add product reviews
